@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource path="res://scripts/school_blockout.gd" type="Script" id="1_school"]
+[ext_resource path="res://scripts/player.gd" type="Script" id="2_player"]
+[ext_resource path="res://scripts/overview_camera.gd" type="Script" id="3_overview"]
+
+[node name="SchoolBlockout" type="Node3D"]
+script = ExtResource("1_school")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+position = Vector3(-8, 1.4, 7)
+script = ExtResource("2_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = null
+
+[node name="Head" type="Node3D" parent="Player"]
+position = Vector3(0, 0.65, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+current = true
+fov = 75.0
+
+[node name="Flashlight" type="SpotLight3D" parent="Player/Head/Camera3D"]
+position = Vector3(0, 0, -0.15)
+light_color = Color(0.86, 0.91, 1, 1)
+light_energy = 4.0
+spot_range = 24.0
+spot_angle = 48.0
+shadow_enabled = true
+[node name="OverviewCamera" type="Camera3D" parent="."]
+current = true
+script = ExtResource("3_overview")
+player_path = NodePath("../Player")
+first_person_camera_path = NodePath("../Player/Head/Camera3D")
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="ColorRect" parent="HUD"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 410.0
+offset_bottom = 116.0
+color = Color(0.03, 0.04, 0.05, 0.82)
+
+[node name="Title" type="Label" parent="HUD/Panel"]
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 374.0
+offset_bottom = 38.0
+text = "PROJECT ZERO  Maqueta 3D"
+theme_override_font_sizes/font_size = 19
+
+[node name="Help" type="Label" parent="HUD/Panel"]
+offset_left = 14.0
+offset_top = 43.0
+offset_right = 378.0
+offset_bottom = 86.0
+text = "WASD mover   Shift correr   Espacio saltar\nRatón mirar   Tab cambiar cámara   Esc liberar/capturar"
+theme_override_colors/font_color = Color(0.78, 0.82, 0.86, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="Prompt" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -110.0
+offset_right = 190.0
+offset_bottom = -70.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.86, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+
+[node name="Coins" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 60.0
+text = "MONEDAS  00"
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(1, 0.79, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -12.0
+offset_right = 7.0
+offset_bottom = 12.0
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 20
+
